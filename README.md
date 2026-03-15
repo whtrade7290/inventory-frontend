@@ -1,152 +1,152 @@
 # Inventory Frontend
 
-재고관리 시스템의 프론트엔드 애플리케이션입니다.
-Airtable 스타일의 스프레드시트 UI로 사용자 정의 테이블을 관리합니다.
+在庫管理システムのフロントエンドアプリケーションです。
+AirtableスタイルのスプレッドシートUIでユーザー定義テーブルを管理します。
 
 ---
 
-## 기술 스택
+## 技術スタック
 
-| 분류 | 기술 |
-|------|------|
-| 프레임워크 | React 19 + TypeScript |
-| 빌드 도구 | Vite 8 |
-| 스타일 | Tailwind CSS 4 |
-| 서버 상태 | TanStack React Query v5 |
-| UI 상태 | Zustand v5 |
-| 라우팅 | React Router v7 |
-| HTTP 클라이언트 | Axios |
-| 드래그 앤 드롭 | dnd-kit |
-| 아이콘 | Lucide React |
-| 아키텍처 | Feature-Sliced Design (FSD) |
+| カテゴリ | 技術 |
+|----------|------|
+| フレームワーク | React 19 + TypeScript |
+| ビルドツール | Vite 8 |
+| スタイル | Tailwind CSS 4 |
+| サーバー状態管理 | TanStack React Query v5 |
+| UI状態管理 | Zustand v5 |
+| ルーティング | React Router v7 |
+| HTTPクライアント | Axios |
+| ドラッグ＆ドロップ | dnd-kit |
+| アイコン | Lucide React |
+| アーキテクチャ | Feature-Sliced Design (FSD) |
 
 ---
 
-## 시작하기
+## はじめに
 
-### 사전 조건
+### 前提条件
 
 - Node.js 18+
-- 백엔드 서버 실행 중 (`localhost:8080`)
+- バックエンドサーバーが起動中であること（`localhost:8080`）
 
-### 설치 및 실행
+### インストールと起動
 
 ```bash
-# 의존성 설치
+# 依存関係のインストール
 npm install
 
-# 개발 서버 시작 (localhost:5173)
+# 開発サーバー起動 (localhost:5173)
 npm run dev
 
-# 프로덕션 빌드
+# プロダクションビルド
 npm run build
 
-# 빌드 결과 미리보기
+# ビルド結果のプレビュー
 npm run preview
 ```
 
-### 백엔드 연결
+### バックエンドとの接続
 
-`vite.config.ts`의 프록시 설정에 의해 `/api` 요청은 자동으로 `localhost:8080`으로 전달됩니다.
-백엔드 포트를 변경했다면 `vite.config.ts`의 proxy 대상을 수정하세요.
-
----
-
-## 주요 기능
-
-### 테이블 관리
-- 사용자 정의 테이블 생성 / 삭제
-- 사이드바 테이블명 더블클릭으로 이름 변경
-
-### 필드(컬럼) 관리
-- 필드 추가 (TEXT / NUMBER / DATE / BOOLEAN / RELATION 타입)
-- RELATION 타입: 다른 테이블의 컬럼을 참조
-- 헤더 드래그 앤 드롭으로 필드 순서 변경
-- 헤더 드롭다운에서 필드 이름 변경 / 삭제
-
-### 레코드(행) 관리
-- 레코드 추가 / 삭제
-- 셀 클릭으로 인라인 편집 (Enter 확정 / ESC 취소 / Tab 다음 셀 이동)
-- RELATION 셀: 참조 테이블 아이템 드롭다운 선택
-
-### 저장 버튼 패턴
-모든 변경사항은 즉시 서버에 저장되지 않고 **로컬 dirty state**에 보관됩니다.
-
-- 변경된 셀 / 필드 헤더는 **노란 배경(`amber-50`)** 으로 표시
-- 툴바 우측 **저장 버튼** 클릭 시 서버에 일괄 반영
-- dirty 변경이 없으면 저장 버튼 비활성화
+`vite.config.ts` のプロキシ設定により、`/api` へのリクエストは自動的に `localhost:8080` へ転送されます。
+バックエンドのポートを変更した場合は、`vite.config.ts` の proxy ターゲットを修正してください。
 
 ---
 
-## 프로젝트 구조
+## 主な機能
 
-FSD(Feature-Sliced Design) 아키텍처를 따릅니다.
-레이어 간 의존 방향은 단방향입니다: `app → pages → widgets → features → entities → shared`
+### テーブル管理
+- ユーザー定義テーブルの作成・削除
+- サイドバーのテーブル名をダブルクリックしてリネーム
+
+### フィールド（カラム）管理
+- フィールドの追加（TEXT / NUMBER / DATE / BOOLEAN / RELATION タイプ）
+- RELATION タイプ：他テーブルのカラムを参照
+- ヘッダーのドラッグ＆ドロップでフィールド順序を変更
+- ヘッダードロップダウンからフィールド名変更・削除
+
+### レコード（行）管理
+- レコードの追加・削除
+- セルクリックでインライン編集（Enter で確定 / ESC でキャンセル / Tab で次のセルへ移動）
+- RELATION セル：参照テーブルのアイテムをドロップダウンで選択
+
+### 保存ボタンパターン
+すべての変更は即座にサーバーへ保存されず、**ローカルの dirty state** に保持されます。
+
+- 変更されたセル・フィールドヘッダーは **黄色の背景（`amber-50`）** で表示
+- ツールバー右側の **保存ボタン** をクリックするとサーバーへ一括反映
+- 未保存の変更がない場合、保存ボタンは無効化
+
+---
+
+## プロジェクト構成
+
+FSD（Feature-Sliced Design）アーキテクチャに従います。
+レイヤー間の依存方向は単方向です：`app → pages → widgets → features → entities → shared`
 
 ```
 src/
 ├── app/
-│   ├── providers/        QueryClientProvider 등 전역 Provider
-│   └── router/           AppShell 레이아웃 + 라우트 정의
+│   ├── providers/        QueryClientProvider などグローバル Provider
+│   └── router/           AppShell レイアウト + ルート定義
 │
-├── shared/               도메인 무관 공통 인프라
-│   ├── api/              axios 클라이언트, React Query 설정, queryKeys
-│   ├── store/            Zustand uiStore (UI 상태 + dirtyTableNames)
-│   ├── ui/               공통 컴포넌트 (Button, Modal, Spinner)
-│   ├── lib/              유틸 함수 (cn)
-│   └── config/           전역 상수 (그리드 너비 등)
+├── shared/               ドメイン非依存の共通インフラ
+│   ├── api/              axios クライアント、React Query 設定、queryKeys
+│   ├── store/            Zustand uiStore（UI状態 + dirtyTableNames）
+│   ├── ui/               共通コンポーネント（Button、Modal、Spinner）
+│   ├── lib/              ユーティリティ関数（cn）
+│   └── config/           グローバル定数（グリッド幅など）
 │
-├── entities/             도메인 단위 서버 상태
-│   ├── user-table/       테이블 타입 · API · React Query 훅
-│   ├── column/           컬럼 타입 · API · 훅 · TypeIcon 컴포넌트
-│   └── inventory-item/   아이템(EAV) 타입 · API · 훅
+├── entities/             ドメイン単位のサーバー状態
+│   ├── user-table/       テーブル型・API・React Query フック
+│   ├── column/           カラム型・API・フック・TypeIcon コンポーネント
+│   └── inventory-item/   アイテム（EAV）型・API・フック
 │
-├── features/             사용자 인터랙션 단위
-│   ├── edit-inventory-item/   셀 인라인 편집 (useEditCell, GridCell, RelationCellInput)
-│   └── manage-columns/        필드 추가 모달 (AddColumnModal)
+├── features/             ユーザーインタラクション単位
+│   ├── edit-inventory-item/   セルインライン編集（useEditCell、GridCell、RelationCellInput）
+│   └── manage-columns/        フィールド追加モーダル（AddColumnModal）
 │
-├── widgets/              features + entities 조합 UI 블록
-│   ├── inventory-grid/   Airtable 스타일 그리드 (dnd-kit 컬럼 D&D 포함)
-│   ├── app-sidebar/      사이드바 (테이블 목록 · 생성 · 삭제 · 이름변경)
-│   └── app-header/       상단 헤더 (회원 영역 자리 포함)
+├── widgets/              features + entities を組み合わせた UI ブロック
+│   ├── inventory-grid/   Airtable スタイルグリッド（dnd-kit カラム D&D 対応）
+│   ├── app-sidebar/      サイドバー（テーブル一覧・作成・削除・リネーム）
+│   └── app-header/       ヘッダー（会員エリアのプレースホルダー含む）
 │
-└── pages/                위젯 조합 + 뮤테이션 오케스트레이션
-    ├── user-table/        EAV 테이블 그리드 페이지 (/tables/:id)
-    ├── stock/             재고 현황 (/stock) — 구현 예정
-    ├── inbound/           입고 관리 (/inbound) — 구현 예정
-    └── outbound/          출고 관리 (/outbound) — 구현 예정
+└── pages/                ウィジェット組み合わせ + ミューテーションオーケストレーション
+    ├── user-table/        EAV テーブルグリッドページ（/tables/:id）
+    ├── stock/             在庫状況（/stock）— 実装予定
+    ├── inbound/           入庫管理（/inbound）— 実装予定
+    └── outbound/          出庫管理（/outbound）— 実装予定
 ```
 
-자세한 설계 내용은 [`definition.md`](./definition.md)를 참고하세요.
+詳細な設計については [`definition.md`](./definition.md) を参照してください。
 
 ---
 
-## 라우트
+## ルート
 
-| 경로 | 페이지 |
+| パス | ページ |
 |------|--------|
-| `/` | `/stock` 리다이렉트 |
-| `/stock` | 재고 현황 (구현 예정) |
-| `/inbound` | 입고 관리 (구현 예정) |
-| `/outbound` | 출고 관리 (구현 예정) |
-| `/tables/:id` | 사용자 정의 테이블 그리드 |
+| `/` | `/stock` へリダイレクト |
+| `/stock` | 在庫状況（実装予定） |
+| `/inbound` | 入庫管理（実装予定） |
+| `/outbound` | 出庫管理（実装予定） |
+| `/tables/:id` | ユーザー定義テーブルグリッド |
 
 ---
 
-## 백엔드 API 연동
+## バックエンド API 一覧
 
-| 메서드 | 경로 | 설명 |
-|--------|------|------|
-| GET | `/api/tables` | 테이블 목록 조회 |
-| POST | `/api/tables` | 테이블 생성 |
-| PATCH | `/api/tables/{id}` | 테이블 이름 변경 |
-| DELETE | `/api/tables/{id}` | 테이블 삭제 |
-| GET | `/api/tables/{id}/columns` | 컬럼 목록 조회 |
-| POST | `/api/tables/{id}/columns` | 컬럼 추가 |
-| PATCH | `/api/tables/{id}/columns/{columnId}` | 컬럼 이름 변경 |
-| PATCH | `/api/tables/{id}/columns/reorder` | 컬럼 순서 일괄 변경 |
-| DELETE | `/api/tables/{id}/columns/{columnId}` | 컬럼 삭제 |
-| GET | `/api/tables/{id}/items` | 아이템 목록 조회 |
-| POST | `/api/tables/{id}/items` | 아이템 추가 |
-| PUT | `/api/tables/{id}/items/{itemId}` | 아이템 수정 |
-| DELETE | `/api/tables/{id}/items/{itemId}` | 아이템 삭제 |
+| メソッド | パス | 説明 |
+|----------|------|------|
+| GET | `/api/tables` | テーブル一覧取得 |
+| POST | `/api/tables` | テーブル作成 |
+| PATCH | `/api/tables/{id}` | テーブル名変更 |
+| DELETE | `/api/tables/{id}` | テーブル削除 |
+| GET | `/api/tables/{id}/columns` | カラム一覧取得 |
+| POST | `/api/tables/{id}/columns` | カラム追加 |
+| PATCH | `/api/tables/{id}/columns/{columnId}` | カラム名変更 |
+| PATCH | `/api/tables/{id}/columns/reorder` | カラム順序一括変更 |
+| DELETE | `/api/tables/{id}/columns/{columnId}` | カラム削除 |
+| GET | `/api/tables/{id}/items` | アイテム一覧取得 |
+| POST | `/api/tables/{id}/items` | アイテム追加 |
+| PUT | `/api/tables/{id}/items/{itemId}` | アイテム更新 |
+| DELETE | `/api/tables/{id}/items/{itemId}` | アイテム削除 |
