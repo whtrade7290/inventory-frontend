@@ -48,5 +48,11 @@ export const queryKeys = {
   stock: {
     all: () => ['stock'] as const,
     detail: (partId: number) => ['stock', partId] as const,
+    /** GET /api/stock/summary — PARTS 테이블 전체 재고 현황 */
+    summary: () => ['stock', 'summary'] as const,
+  },
+  projects: {
+    all: () => ['projects'] as const,
+    detail: (id: number) => ['projects', id] as const,
   },
 }

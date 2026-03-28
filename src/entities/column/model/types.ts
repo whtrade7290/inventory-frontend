@@ -12,6 +12,8 @@ export interface Column {
   refTableId?: number
   /** RELATION 타입일 때 표시할 컬럼 ID */
   refColumnId?: number
+  /** 시스템 컬럼 여부 — true이면 삭제/수정 불가 (예: ID 컬럼) */
+  isSystem: boolean
   createdAt: string
 }
 
